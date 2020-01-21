@@ -320,6 +320,22 @@ multiclass F3_12<string OpcStr, bits<6> Op3Val, SDNode OpNode,
                  itin>;
 }
 
+/// F5_12 multiclass - Define a normal F5_1/F5_2 pattern in one shot.
+multiclass F5_12<string OpcStr, bits<6> Op3Val, SDNode OpNode,
+                 RegisterClass RC, ValueType Ty, Operand immOp,
+                 InstrItinClass itin = IIC_iu_instr> {
+  def rr  : F5_1<2, Op3Val,
+                 (outs RC:$rd), (ins RC:$rs1, RC:$rs2),
+                 !strconcat(OpcStr, " $rs1, $rs2, $rd"),
+                 [(set Ty:$rd, (OpNode Ty:$rs1, Ty:$rs2))],
+                 itin>;
+  def ri  : F5_2<2, Op3Val,
+                 (outs RC:$rd), (ins RC:$rs1, immOp:$simm13),
+                 !strconcat(OpcStr, " $rs1, $simm13, $rd"),
+                 [(set Ty:$rd, (OpNode Ty:$rs1, (Ty simm13:$simm13)))],
+                 itin>;
+}
+
 /// F3_12np multiclass - Define a normal F3_1/F3_2 pattern in one shot, with no
 /// pattern.
 multiclass F3_12np<string OpcStr, bits<6> Op3Val, InstrItinClass itin = IIC_iu_instr> {
@@ -695,8 +711,14 @@ defm SLL : F3_12<"sll", 0b100101, shl, IntRegs, i32, simm13Op>;
 defm SRL : F3_12<"srl", 0b100110, srl, IntRegs, i32, simm13Op>;
 defm SRA : F3_12<"sra", 0b100111, sra, IntRegs, i32, simm13Op>;
 
+//AD add to anshuman
+//AD let DecoderMethod = "DecodeLoadIntPair" in
+  defm ADDD : F5_12<"addd", 0b111111, add, IntPair, v2i32, simm13Op>;
+  //LoadA<"ldd", 0b000011, 0b010011, load, IntPair, v2i32, IIC_ldd>;
+
 // Section B.13 - Add Instructions, p. 108
-defm ADD   : F3_12<"add", 0b000000, add, IntRegs, i32, simm13Op>;
+//AD defm ADD   : F3_12<"add", 0b000000, add, IntRegs, i32, simm13Op>;
+defm ADD   : F3_12<"anshuman", 0b000000, add, IntRegs, i32, simm13Op>;
 
 // "LEA" forms of add (patterns to make tblgen happy)
 let Predicates = [Is32Bit], isCodeGenOnly = 1 in

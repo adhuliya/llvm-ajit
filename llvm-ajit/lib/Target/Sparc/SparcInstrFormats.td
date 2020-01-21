@@ -322,6 +322,58 @@ class F4_4i<bits<6> op3, bits<3> rcond, dag outs, dag ins,
   let Inst{9-0}   = simm10;
 }
 
+//AD: New Ajit instruction formats
+//===----------------------------------------------------------------------===//
+// Format #5 instruction classes in the Sparc
+//===----------------------------------------------------------------------===//
+
+class F5<dag outs, dag ins, string asmstr, list<dag> pattern,
+         InstrItinClass itin = NoItinerary>
+   : InstSP<outs, ins, asmstr, pattern, itin> {
+  bits<5> rd;
+  bits<6> op3;
+  bits<5> rs1;
+  let op{1} = 1;   // Op = 2 or 3
+  let Inst{29-25} = rd;
+  let Inst{24-19} = op3;
+  let Inst{18-14} = rs1;
+}
+
+// Specific F5 classes: Ajit manual
+//
+class F5_1_asi<bits<2> opVal, bits<6> op3val, dag outs, dag ins,
+           string asmstr, list<dag> pattern, InstrItinClass itin = NoItinerary>
+   : F5<outs, ins, asmstr, pattern, itin> {
+  bits<8> asi;
+  bits<5> rs2;
+
+  let op         = opVal;
+  let op3        = op3val;
+
+  let Inst{13}   = 0;     // i field = 0
+  let Inst{12-5} = asi;   // address space identifier
+  let Inst{4-0}  = rs2;
+}
+
+class F5_1<bits<2> opVal, bits<6> op3val, dag outs, dag ins, string asmstr,
+       list<dag> pattern, InstrItinClass itin = IIC_iu_instr>
+  : F5_1_asi<opVal, op3val, outs, ins, asmstr, pattern, itin> {
+  let asi = 1;
+}
+
+class F5_2<bits<2> opVal, bits<6> op3val, dag outs, dag ins,
+           string asmstr, list<dag> pattern, InstrItinClass itin = IIC_iu_instr>
+   : F5<outs, ins, asmstr, pattern, itin> {
+  bits<13> simm13;
+
+  let op         = opVal;
+  let op3        = op3val;
+
+  let Inst{13}   = 1;     // i field = 1
+  let Inst{12-0} = simm13;
+}
+
+//===----------------------------------------------------------------------===//
 
 class TRAPSP<bits<6> op3Val, bit isimm, dag outs, dag ins,
              string asmstr, list<dag> pattern,
