@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/codeman/itsoflife/mydata/local/packages-live/clion-2019.3.2/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/codeman/itsoflife/mydata/local/ssd/clion-2019.3.2/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/codeman/itsoflife/mydata/local/packages-live/clion-2019.3.2/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/codeman/itsoflife/mydata/local/ssd/clion-2019.3.2/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/codeman/itsoflife/mydata/local/packages-live/llvm-clang
 include tools/clang/lib/Analysis/plugins/CheckerOptionHandling/CMakeFiles/install-CheckerOptionHandlingAnalyzerPlugin.dir/progress.make
 
 tools/clang/lib/Analysis/plugins/CheckerOptionHandling/CMakeFiles/install-CheckerOptionHandlingAnalyzerPlugin:
-	cd /home/codeman/itsoflife/mydata/local/packages-live/llvm-clang9.0.0/llvm-ajit-git/llvm-ajit/cmake-build-debug/tools/clang/lib/Analysis/plugins/CheckerOptionHandling && /home/codeman/.itsoflife/mydata/local/packages-live/clion-2019.3.2/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_COMPONENT="CheckerOptionHandlingAnalyzerPlugin" -P /home/codeman/itsoflife/mydata/local/packages-live/llvm-clang9.0.0/llvm-ajit-git/llvm-ajit/cmake-build-debug/cmake_install.cmake
+	cd /home/codeman/itsoflife/mydata/local/packages-live/llvm-clang9.0.0/llvm-ajit-git/llvm-ajit/cmake-build-debug/tools/clang/lib/Analysis/plugins/CheckerOptionHandling && /home/codeman/.itsoflife/mydata/local/ssd/clion-2019.3.2/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_COMPONENT="CheckerOptionHandlingAnalyzerPlugin" -P /home/codeman/itsoflife/mydata/local/packages-live/llvm-clang9.0.0/llvm-ajit-git/llvm-ajit/cmake-build-debug/cmake_install.cmake
 
 install-CheckerOptionHandlingAnalyzerPlugin: tools/clang/lib/Analysis/plugins/CheckerOptionHandling/CMakeFiles/install-CheckerOptionHandlingAnalyzerPlugin
 install-CheckerOptionHandlingAnalyzerPlugin: tools/clang/lib/Analysis/plugins/CheckerOptionHandling/CMakeFiles/install-CheckerOptionHandlingAnalyzerPlugin.dir/build.make
