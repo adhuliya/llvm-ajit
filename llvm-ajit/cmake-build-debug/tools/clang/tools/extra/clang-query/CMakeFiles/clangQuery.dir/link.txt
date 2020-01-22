@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../lib/libclangQuery.a  CMakeFiles/obj.clangQuery.dir/Query.cpp.o CMakeFiles/obj.clangQuery.dir/QueryParser.cpp.o
+/usr/bin/ranlib ../../../../../lib/libclangQuery.a

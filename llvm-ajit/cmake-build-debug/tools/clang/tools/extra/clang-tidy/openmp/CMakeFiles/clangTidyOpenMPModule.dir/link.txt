@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../../lib/libclangTidyOpenMPModule.a  CMakeFiles/obj.clangTidyOpenMPModule.dir/ExceptionEscapeCheck.cpp.o CMakeFiles/obj.clangTidyOpenMPModule.dir/OpenMPTidyModule.cpp.o CMakeFiles/obj.clangTidyOpenMPModule.dir/UseDefaultNoneCheck.cpp.o
+/usr/bin/ranlib ../../../../../../lib/libclangTidyOpenMPModule.a

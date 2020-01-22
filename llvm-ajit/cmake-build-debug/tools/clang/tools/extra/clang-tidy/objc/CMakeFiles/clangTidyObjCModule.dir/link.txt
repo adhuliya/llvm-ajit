@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../../lib/libclangTidyObjCModule.a  CMakeFiles/obj.clangTidyObjCModule.dir/AvoidNSErrorInitCheck.cpp.o CMakeFiles/obj.clangTidyObjCModule.dir/AvoidSpinlockCheck.cpp.o CMakeFiles/obj.clangTidyObjCModule.dir/ForbiddenSubclassingCheck.cpp.o CMakeFiles/obj.clangTidyObjCModule.dir/ObjCTidyModule.cpp.o CMakeFiles/obj.clangTidyObjCModule.dir/PropertyDeclarationCheck.cpp.o CMakeFiles/obj.clangTidyObjCModule.dir/SuperSelfCheck.cpp.o
+/usr/bin/ranlib ../../../../../../lib/libclangTidyObjCModule.a

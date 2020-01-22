@@ -1,0 +1,8 @@
+Included from SparcInstrInfo.td:17:
+SparcInstrFormats.td:10:14: error: Couldn't find class 'InstrItinClass'
+             InstrItinClass itin = NoItinerary>
+             ^
+Included from SparcInstrInfo.td:17:
+SparcInstrFormats.td:10:29: error: unknown class name
+             InstrItinClass itin = NoItinerary>
+                            ^

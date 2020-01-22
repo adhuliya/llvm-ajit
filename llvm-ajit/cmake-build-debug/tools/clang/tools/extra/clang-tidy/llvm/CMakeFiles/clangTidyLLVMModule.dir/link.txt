@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../../lib/libclangTidyLLVMModule.a  CMakeFiles/obj.clangTidyLLVMModule.dir/HeaderGuardCheck.cpp.o CMakeFiles/obj.clangTidyLLVMModule.dir/IncludeOrderCheck.cpp.o CMakeFiles/obj.clangTidyLLVMModule.dir/LLVMTidyModule.cpp.o CMakeFiles/obj.clangTidyLLVMModule.dir/PreferIsaOrDynCastInConditionalsCheck.cpp.o CMakeFiles/obj.clangTidyLLVMModule.dir/TwineLocalCheck.cpp.o
+/usr/bin/ranlib ../../../../../../lib/libclangTidyLLVMModule.a

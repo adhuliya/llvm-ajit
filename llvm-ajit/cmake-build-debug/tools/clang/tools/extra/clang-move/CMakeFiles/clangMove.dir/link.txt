@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../lib/libclangMove.a  CMakeFiles/obj.clangMove.dir/Move.cpp.o CMakeFiles/obj.clangMove.dir/HelperDeclRefGraph.cpp.o
+/usr/bin/ranlib ../../../../../lib/libclangMove.a

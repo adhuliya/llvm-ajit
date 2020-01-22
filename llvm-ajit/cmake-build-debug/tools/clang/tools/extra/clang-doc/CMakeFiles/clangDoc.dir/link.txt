@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../lib/libclangDoc.a  CMakeFiles/obj.clangDoc.dir/BitcodeReader.cpp.o CMakeFiles/obj.clangDoc.dir/BitcodeWriter.cpp.o CMakeFiles/obj.clangDoc.dir/ClangDoc.cpp.o CMakeFiles/obj.clangDoc.dir/Generators.cpp.o CMakeFiles/obj.clangDoc.dir/HTMLGenerator.cpp.o CMakeFiles/obj.clangDoc.dir/Mapper.cpp.o CMakeFiles/obj.clangDoc.dir/MDGenerator.cpp.o CMakeFiles/obj.clangDoc.dir/Representation.cpp.o CMakeFiles/obj.clangDoc.dir/Serialize.cpp.o CMakeFiles/obj.clangDoc.dir/YAMLGenerator.cpp.o
+/usr/bin/ranlib ../../../../../lib/libclangDoc.a

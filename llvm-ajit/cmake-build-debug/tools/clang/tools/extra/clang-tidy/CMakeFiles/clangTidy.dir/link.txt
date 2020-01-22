@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../lib/libclangTidy.a  CMakeFiles/obj.clangTidy.dir/ClangTidy.cpp.o CMakeFiles/obj.clangTidy.dir/ClangTidyCheck.cpp.o CMakeFiles/obj.clangTidy.dir/ClangTidyModule.cpp.o CMakeFiles/obj.clangTidy.dir/ClangTidyDiagnosticConsumer.cpp.o CMakeFiles/obj.clangTidy.dir/ClangTidyOptions.cpp.o CMakeFiles/obj.clangTidy.dir/ClangTidyProfiling.cpp.o CMakeFiles/obj.clangTidy.dir/ExpandModularHeadersPPCallbacks.cpp.o
+/usr/bin/ranlib ../../../../../lib/libclangTidy.a

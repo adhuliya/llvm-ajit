@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../libLLVMRISCVAsmParser.a  CMakeFiles/LLVMRISCVAsmParser.dir/RISCVAsmParser.cpp.o
+/usr/bin/ranlib ../../../libLLVMRISCVAsmParser.a

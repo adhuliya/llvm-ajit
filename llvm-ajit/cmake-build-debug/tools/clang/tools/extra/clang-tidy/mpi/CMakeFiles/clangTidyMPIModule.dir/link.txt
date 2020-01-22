@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../../lib/libclangTidyMPIModule.a  CMakeFiles/obj.clangTidyMPIModule.dir/BufferDerefCheck.cpp.o CMakeFiles/obj.clangTidyMPIModule.dir/MPITidyModule.cpp.o CMakeFiles/obj.clangTidyMPIModule.dir/TypeMismatchCheck.cpp.o
+/usr/bin/ranlib ../../../../../../lib/libclangTidyMPIModule.a

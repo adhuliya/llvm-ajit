@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../../../../lib/libclangDaemonTweaks.a  CMakeFiles/obj.clangDaemonTweaks.dir/AnnotateHighlightings.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/DumpAST.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/ExpandMacro.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/RawStringLiteral.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/SwapIfBranches.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/ExtractVariable.cpp.o CMakeFiles/obj.clangDaemonTweaks.dir/ExpandAutoType.cpp.o
+/usr/bin/ranlib ../../../../../../../lib/libclangDaemonTweaks.a
