@@ -1435,7 +1435,14 @@ SparcTargetLowering::SparcTargetLowering(const TargetMachine &TM,
     // ...but almost all operations must be expanded, so set that as
     // the default.
     for (unsigned Op = 0; Op < ISD::BUILTIN_OP_END; ++Op) {
-      setOperationAction(Op, MVT::v2i32, Expand);
+      switch (Op) {                                       //AD
+        case ISD::ADD:                                    //AD
+          setOperationAction(Op, MVT::v2i32, Legal);      //AD
+          llvm::errs() << "DEBUG: here\n"; //delit
+          break;                                          //AD
+        default:                                          //AD
+          setOperationAction(Op, MVT::v2i32, Expand);
+      }                                                   //AD
     }
     // Truncating/extending stores/loads are also not supported.
     for (MVT VT : MVT::integer_vector_valuetypes()) {

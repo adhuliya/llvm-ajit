@@ -708,12 +708,12 @@ defm SRA : F3_12<"sra", 0b100111, sra, IntRegs, i32, simm13Op>;
 
 //AD add to anshuman
 let DecoderMethod = "DecodeLoadIntPair" in
-  defm ADDD : F5_12<"adddd", 0b000000, add, IntPair, v2i32, simm13Op>;
+  defm ADDD : F5_12<"addd", 0b000000, add, IntPair, v2i32, simm13Op>;
   //LoadA<"ldd", 0b000011, 0b010011, load, IntPair, v2i32, IIC_ldd>;
 
 // Section B.13 - Add Instructions, p. 108
 //AD defm ADD   : F3_12<"add", 0b000000, add, IntRegs, i32, simm13Op>;
-defm ADD   : F3_12<"anshuman", 0b000000, add, IntRegs, i32, simm13Op>;
+defm ADD   : F3_12<"32bitAdd", 0b000000, add, IntRegs, i32, simm13Op>;
 
 // "LEA" forms of add (patterns to make tblgen happy)
 let Predicates = [Is32Bit], isCodeGenOnly = 1 in
