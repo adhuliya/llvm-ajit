@@ -1436,9 +1436,10 @@ SparcTargetLowering::SparcTargetLowering(const TargetMachine &TM,
     // the default.
     for (unsigned Op = 0; Op < ISD::BUILTIN_OP_END; ++Op) {
       switch (Op) {                                       //AD
+        case ISD::ADDC:                                    //AD
         case ISD::ADD:                                    //AD
           setOperationAction(Op, MVT::v2i32, Legal);      //AD
-          llvm::errs() << "DEBUG: here\n"; //delit
+          llvm::errs() << "DEBUG: here " << Op << "\n"; //delit
           break;                                          //AD
         default:                                          //AD
           setOperationAction(Op, MVT::v2i32, Expand);
@@ -1936,6 +1937,8 @@ SDValue SparcTargetLowering::withTargetFlags(SDValue Op, unsigned TF,
 SDValue SparcTargetLowering::makeHiLoPair(SDValue Op,
                                           unsigned HiTF, unsigned LoTF,
                                           SelectionDAG &DAG) const {
+  llvm::errs() << "HERE: makeHiLoPair\n"; //delit
+  Op.dump(); //delit
   SDLoc DL(Op);
   EVT VT = Op.getValueType();
   SDValue Hi = DAG.getNode(SPISD::Hi, DL, VT, withTargetFlags(Op, HiTF, DAG));
@@ -3006,6 +3009,11 @@ SDValue SparcTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
 
 SDValue SparcTargetLowering::
 LowerOperation(SDValue Op, SelectionDAG &DAG) const {
+  if (Op.getOpcode() == ISD::ADD) {//delit
+    llvm::errs() << "HERE: ADD instruction lowerered\n";//delit
+  }//delit
+  llvm::errs() << "HERE: LowerOperation\n";//delit
+  Op.dump(); //delit
 
   bool hasHardQuad = Subtarget->hasHardQuad();
   bool isV9        = Subtarget->isV9();

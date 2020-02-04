@@ -158,7 +158,7 @@ class F3_3<bits<2> opVal, bits<6> op3val, bits<9> opfval, dag outs, dag ins,
    : F3<outs, ins, asmstr, pattern, itin> {
   bits<5> rs2;
 
-  let op8         = opVal;
+  let op         = opVal;
   let op3        = op3val;
 
   let Inst{13-5} = opfval;   // fp opcode

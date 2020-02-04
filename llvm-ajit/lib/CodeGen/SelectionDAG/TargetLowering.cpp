@@ -6041,6 +6041,7 @@ void TargetLowering::expandUADDSUBO(
 
 void TargetLowering::expandSADDSUBO(
     SDNode *Node, SDValue &Result, SDValue &Overflow, SelectionDAG &DAG) const {
+  llvm::errs() << "HERE: expandSADDSUBO\n"; //delit
   SDLoc dl(Node);
   SDValue LHS = Node->getOperand(0);
   SDValue RHS = Node->getOperand(1);
