@@ -320,7 +320,7 @@ multiclass F3_12<string OpcStr, bits<6> Op3Val, SDNode OpNode,
                  itin>;
 }
 
-/// F5_12 multiclass - Define a normal F5_1/F5_2 pattern in one shot.
+//AD F5_12 multiclass - Define a normal F5_1/F5_2 pattern in one shot.
 multiclass F5_12<string OpcStr, bits<6> Op3Val, SDNode OpNode,
                  RegisterClass RC, ValueType Ty, Operand immOp,
                  InstrItinClass itin = IIC_iu_instr> {
