@@ -1438,6 +1438,7 @@ SparcTargetLowering::SparcTargetLowering(const TargetMachine &TM,
       switch (Op) {                                       //AD
         case ISD::ADDC:                                    //AD
         case ISD::ADD:                                    //AD
+        case ISD::ADDE:
           setOperationAction(Op, MVT::v2i32, Legal);      //AD
           llvm::errs() << "DEBUG: here " << Op << "\n"; //delit
           break;                                          //AD
