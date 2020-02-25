@@ -34,6 +34,8 @@
 using namespace llvm;
 
 
+#define DEBUG_TYPE "selectiondag"  //delit
+
 //===----------------------------------------------------------------------===//
 // Calling Convention Implementation
 //===----------------------------------------------------------------------===//
@@ -1440,7 +1442,6 @@ SparcTargetLowering::SparcTargetLowering(const TargetMachine &TM,
         case ISD::ADD:                                    //AD
         case ISD::ADDE:
           setOperationAction(Op, MVT::v2i32, Legal);      //AD
-          llvm::errs() << "DEBUG: here " << Op << "\n"; //delit
           break;                                          //AD
         default:                                          //AD
           setOperationAction(Op, MVT::v2i32, Expand);
@@ -1938,8 +1939,6 @@ SDValue SparcTargetLowering::withTargetFlags(SDValue Op, unsigned TF,
 SDValue SparcTargetLowering::makeHiLoPair(SDValue Op,
                                           unsigned HiTF, unsigned LoTF,
                                           SelectionDAG &DAG) const {
-  llvm::errs() << "HERE: makeHiLoPair\n"; //delit
-  Op.dump(); //delit
   SDLoc DL(Op);
   EVT VT = Op.getValueType();
   SDValue Hi = DAG.getNode(SPISD::Hi, DL, VT, withTargetFlags(Op, HiTF, DAG));
@@ -2787,6 +2786,18 @@ static SDValue LowerLOAD(SDValue Op, SelectionDAG &DAG)
   return Op;
 }
 
+//AD: added to lower the ADD instruction
+static SDValue LowerADD(SDValue Op, SelectionDAG &DAG)
+{
+  LoadSDNode *LdNode = cast<LoadSDNode>(Op.getNode());
+
+  EVT MemVT = LdNode->getMemoryVT();
+  if (MemVT == MVT::f128)
+    return LowerF128Load(Op, DAG);
+
+  return Op;
+}
+
 // Lower a f128 store into two f64 stores.
 static SDValue LowerF128Store(SDValue Op, SelectionDAG &DAG) {
   SDLoc dl(Op);
@@ -3010,12 +3021,6 @@ SDValue SparcTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
 
 SDValue SparcTargetLowering::
 LowerOperation(SDValue Op, SelectionDAG &DAG) const {
-  if (Op.getOpcode() == ISD::ADD) {//delit
-    llvm::errs() << "HERE: ADD instruction lowerered\n";//delit
-  }//delit
-  llvm::errs() << "HERE: LowerOperation\n";//delit
-  Op.dump(); //delit
-
   bool hasHardQuad = Subtarget->hasHardQuad();
   bool isV9        = Subtarget->isV9();
 
@@ -3063,6 +3068,8 @@ LowerOperation(SDValue Op, SelectionDAG &DAG) const {
   case ISD::FNEG:               return LowerFNEGorFABS(Op, DAG, isV9);
   case ISD::FP_EXTEND:          return LowerF128_FPEXTEND(Op, DAG, *this);
   case ISD::FP_ROUND:           return LowerF128_FPROUND(Op, DAG, *this);
+  case ISD::ADD:                //AD
+    return LowerADD(Op, DAG);   //AD
   case ISD::ADDC:
   case ISD::ADDE:
   case ISD::SUBC:
@@ -3411,8 +3418,10 @@ void SparcTargetLowering::ReplaceNodeResults(SDNode *N,
         Ld->getBasePtr(), Ld->getPointerInfo(), MVT::v2i32, Ld->getAlignment(),
         Ld->getMemOperand()->getFlags(), Ld->getAAInfo());
 
-    SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::i64, LoadRes);
-    Results.push_back(Res);
+    LLVM_DEBUG(dbgs() << "AD: Creating bitcast\n");  //delit
+    //AD SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::i64, LoadRes);
+    //AD Results.push_back(Res);
+    Results.push_back(LoadRes.getValue(0));  //AD
     Results.push_back(LoadRes.getValue(1));
     return;
   }
