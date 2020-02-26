@@ -1470,6 +1470,9 @@ SparcTargetLowering::SparcTargetLowering(const TargetMachine &TM,
     setOperationAction(ISD::LOAD, MVT::i64, Custom);
     setOperationAction(ISD::STORE, MVT::i64, Custom);
 
+    //AD: custom lowering of operations
+    setOperationAction(ISD::ADD, MVT::i64, Custom); //AD
+
     // Sadly, this doesn't work:
     //    AddPromotedToType(ISD::LOAD, MVT::i64, MVT::v2i32);
     //    AddPromotedToType(ISD::STORE, MVT::i64, MVT::v2i32);
@@ -2790,15 +2793,18 @@ static SDValue LowerLOAD(SDValue Op, SelectionDAG &DAG)
 static SDValue LowerADD(SDValue Op, SelectionDAG &DAG)
 {
   MachineSDNode *node = cast<MachineSDNode>(Op.getNode());
+  llvm::errs() << "HERE: LowerADD\n"; //delit
 
   SDVTList vtList = node->getVTList();
+  const SDLoc loc(Op);
   if (vtList.VTs[0] == MVT::i64 && vtList.VTs[1] == MVT::i64) {
+    SDValue val1 = node->getOperand(0);
+    SDValue val2 = node->getOperand(1);
     SDValue addValue = DAG.getNode((unsigned)ISD::ADD,
-        node->getDebugLoc(),
+        loc,
         EVT(MVT::v2i32),
-        node->getOperand(0),
-        node->getOperand(1),
-        node->getFlags());
+        val1,
+        val2);
     return addValue;
   }
   //AD:for ref: return DAG.getNode(ISD::ADD, DL, VT, Hi, Lo);
@@ -3428,11 +3434,23 @@ void SparcTargetLowering::ReplaceNodeResults(SDNode *N,
 
     LLVM_DEBUG(dbgs() << "AD: Creating bitcast\n");  //delit
     //AD SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::i64, LoadRes);
-    //AD Results.push_back(Res);
-    Results.push_back(LoadRes.getValue(0));  //AD
+    SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::v2i32, LoadRes);  //AD
+    Results.push_back(Res);
     Results.push_back(LoadRes.getValue(1));
     return;
   }
+    case ISD::ADD: {  //AD this whole case.
+      llvm::errs() << "AD: HERE: ReplaceNodeReults\n"; //delit
+      MachineSDNode *node = cast<MachineSDNode>(N);
+
+      // Custom handling only for i64: turn i64 load into a v2i32 load,
+      // and a bitcast.
+      if (node->getSimpleValueType(0) != MVT::i64) {
+        return;
+      }
+      //AD: TODO
+      return;
+    } //AD: case ISD::ADD
   }
 }
 

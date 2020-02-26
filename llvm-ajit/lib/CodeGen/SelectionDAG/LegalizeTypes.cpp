@@ -761,6 +761,7 @@ void DAGTypeLegalizer::GetExpandedInteger(SDValue Op, SDValue &Lo,
                                           SDValue &Hi) {
   std::pair<TableId, TableId> &Entry = ExpandedIntegers[getTableId(Op)];
   LLVM_DEBUG(dbgs() << "AD: GetExpandedInteger\n");  //delit
+  LLVM_DEBUG(dbgs() << "AD: " << Entry.first << ", " << Entry.second << "\n");  //delit
   Op.dump(); //delit
   assert((Entry.first != 0) && "Operand isn't expanded");
   Lo = getSDValue(Entry.first);

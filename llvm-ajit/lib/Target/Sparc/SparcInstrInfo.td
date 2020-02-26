@@ -710,6 +710,9 @@ defm SRA : F3_12<"sra", 0b100111, sra, IntRegs, i32, simm13Op>;
 let DecoderMethod = "DecodeLoadIntPair" in
   defm ADDD : F5_12<"addd", 0b000000, add, IntPair, v2i32, simm13Op>;
   //LoadA<"ldd", 0b000011, 0b010011, load, IntPair, v2i32, IIC_ldd>;
+  defm ADDDCC : F5_12<"adddcc", 0b010000, addc, IntPair, v2i32, simm13Op>;
+  defm SUBD : F5_12<"subd", 0b000100, sub, IntPair, v2i32, simm13Op>;
+  defm SUBDCC : F5_12<"subdcc", 0b010100, subc, IntPair, v2i32, simm13Op>;
 
 // Section B.13 - Add Instructions, p. 108
 //AD defm ADD   : F3_12<"add", 0b000000, add, IntRegs, i32, simm13Op>;
