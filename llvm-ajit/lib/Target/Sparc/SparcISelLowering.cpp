@@ -2789,11 +2789,19 @@ static SDValue LowerLOAD(SDValue Op, SelectionDAG &DAG)
 //AD: added to lower the ADD instruction
 static SDValue LowerADD(SDValue Op, SelectionDAG &DAG)
 {
-  LoadSDNode *LdNode = cast<LoadSDNode>(Op.getNode());
+  MachineSDNode *node = cast<MachineSDNode>(Op.getNode());
 
-  EVT MemVT = LdNode->getMemoryVT();
-  if (MemVT == MVT::f128)
-    return LowerF128Load(Op, DAG);
+  SDVTList vtList = node->getVTList();
+  if (vtList.VTs[0] == MVT::i64 && vtList.VTs[1] == MVT::i64) {
+    SDValue addValue = DAG.getNode((unsigned)ISD::ADD,
+        node->getDebugLoc(),
+        EVT(MVT::v2i32),
+        node->getOperand(0),
+        node->getOperand(1),
+        node->getFlags());
+    return addValue;
+  }
+  //AD:for ref: return DAG.getNode(ISD::ADD, DL, VT, Hi, Lo);
 
   return Op;
 }
@@ -3068,8 +3076,8 @@ LowerOperation(SDValue Op, SelectionDAG &DAG) const {
   case ISD::FNEG:               return LowerFNEGorFABS(Op, DAG, isV9);
   case ISD::FP_EXTEND:          return LowerF128_FPEXTEND(Op, DAG, *this);
   case ISD::FP_ROUND:           return LowerF128_FPROUND(Op, DAG, *this);
-  case ISD::ADD:                //AD
-    return LowerADD(Op, DAG);   //AD
+  case ISD::ADD:                    //AD
+    return LowerADD(Op, DAG);    //AD
   case ISD::ADDC:
   case ISD::ADDE:
   case ISD::SUBC:
