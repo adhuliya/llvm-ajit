@@ -2426,7 +2426,9 @@ private:
   friend class SelectionDAG;
 
   MachineSDNode(unsigned Opc, unsigned Order, const DebugLoc &DL, SDVTList VTs)
-      : SDNode(Opc, Order, DL, VTs) {}
+      : SDNode(Opc, Order, DL, VTs) {
+    llvm::errs() << "AD: MachineSDNode() created.\n"; //delit
+  }
 
   // We use a pointer union between a single `MachineMemOperand` pointer and
   // a pointer to an array of `MachineMemOperand` pointers. This is null when
