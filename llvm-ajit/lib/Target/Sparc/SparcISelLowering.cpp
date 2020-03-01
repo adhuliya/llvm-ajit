@@ -3432,23 +3432,20 @@ void SparcTargetLowering::ReplaceNodeResults(SDNode *N,
         Ld->getBasePtr(), Ld->getPointerInfo(), MVT::v2i32, Ld->getAlignment(),
         Ld->getMemOperand()->getFlags(), Ld->getAAInfo());
 
-    LLVM_DEBUG(dbgs() << "AD: Creating bitcast\n");  //delit
+    LLVM_DEBUG(dbgs() << "AD: Not Creating bitcast\n");  //delit
     //AD SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::i64, LoadRes);
-    SDValue Res = DAG.getNode(ISD::BITCAST, dl, MVT::v2i32, LoadRes);  //AD
-    Results.push_back(Res);
+    //AD Results.push_back(Res);
+    Results.push_back(LoadRes.getValue(0));  //AD
     Results.push_back(LoadRes.getValue(1));
     return;
   }
     case ISD::ADD: {  //AD this whole case.
-      llvm::errs() << "AD: HERE: ReplaceNodeReults\n"; //delit
-      MachineSDNode *node = cast<MachineSDNode>(N);
-
-      // Custom handling only for i64: turn i64 load into a v2i32 load,
-      // and a bitcast.
-      if (node->getSimpleValueType(0) != MVT::i64) {
-        return;
-      }
-      //AD: TODO
+      llvm::errs() << "AD: HERE: ReplaceNodeResults (ISD::ADD)\n"; //delit
+      SDLoc dl(N);
+      SDValue sdval = DAG.getNode(ISD::ADD, dl,
+          MVT::v2i32, N->getOperand(0), N->getOperand(1));
+      //Results.push_back(sdval.getValue(0));
+      Results.push_back(sdval.getValue(0));
       return;
     } //AD: case ISD::ADD
   }

@@ -3882,7 +3882,7 @@ unsigned SelectionDAG::ComputeNumSignBits(SDValue Op, const APInt &DemandedElts,
   // If we are looking at the loaded value of the SDNode.
   if (Op.getResNo() == 0) {
     // Handle LOADX separately here. EXTLOAD case will fallthrough.
-    if (LoadSDNode *LD = dynSelectionDAGNodes.cpp_cast<LoadSDNode>(Op)) {
+    if (LoadSDNode *LD = dyn_cast<LoadSDNode>(Op)) {
       unsigned ExtType = LD->getExtensionType();
       switch (ExtType) {
       default: break;
