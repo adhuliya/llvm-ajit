@@ -28,7 +28,7 @@ namespace llvm {
   class Type;
 
 //>> codestory machine-value-types.10 start
-//>> Value types used in llvm backend.
+//>> [Codegen] Value types used in llvm backend.
 //>> At many places EVT type is used, which in most cases
 //>> is only used as a wrapper on MVT value type.
   /// Extended Value Type. Capable of holding value types which are not native
