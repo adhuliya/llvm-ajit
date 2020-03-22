@@ -23,19 +23,28 @@ namespace llvm {
 
   class Type;
 
+//>> codestory machine-value-types.20 start
+//>> MVT class simply contains an enum of types.
   /// Machine Value Type. Every type that is supported natively by some
   /// processor targeted by LLVM occurs here. This means that any legal value
   /// type can be represented by an MVT.
   class MVT {
   public:
+//>> codestory machine-value-types.50 start
+//>> The enum values for types available in llvm.
     enum SimpleValueType : uint8_t {
       // Simple value types that aren't explicitly part of this enumeration
       // are considered extended value types.
+//>> codestory machine-value-types.20 end
       INVALID_SIMPLE_VALUE_TYPE = 0,
 
       // If you change this numbering, you must change the values in
       // ValueTypes.td as well!
+//>> codestory machine-value-types.60 start
+//>> `MVT::Other` is the type use for chain value types.
+//>> "Chains" are represented with blue color arrows.
       Other          =   1,   // This is a non-standard value
+//>> codestory machine-value-types.60 end
       i1             =   2,   // This is a 1 bit integer value
       i8             =   3,   // This is an 8 bit integer value
       i16            =   4,   // This is a 16 bit integer value
@@ -198,7 +207,10 @@ namespace llvm {
 
       x86mmx         =  125,   // This is an X86 MMX value
 
+//>> codestory machine-value-types.70 start
+//>> `MVT::Glue` is use for glue chains (red arrows in dag graphs)
       Glue           =  126,   // This glues nodes together during pre-RA sched
+//>> codestory machine-value-types.70 end
 
       isVoid         =  127,   // This has no value
 
@@ -250,8 +262,12 @@ namespace llvm {
       // This is only for tblgen's consumption!
       Any            = 255
     };
+//>> codestory machine-value-types.50 end
 
+//>> codestory machine-value-types.30 start
+//>> `MVT::SimpleTy` holds the actual value. (its public!!)
     SimpleValueType SimpleTy = INVALID_SIMPLE_VALUE_TYPE;
+//>> codestory machine-value-types.30 end
 
     // A class to represent the number of elements in a vector
     //
@@ -288,6 +304,8 @@ namespace llvm {
       }
     };
 
+//>> codestory machine-value-types.40 start
+//>> There is implicit conversion from `MVT::SimpleValueType` to MVT.
     constexpr MVT() = default;
     constexpr MVT(SimpleValueType SVT) : SimpleTy(SVT) {}
 
@@ -297,6 +315,7 @@ namespace llvm {
     bool operator!=(const MVT& S) const { return SimpleTy != S.SimpleTy; }
     bool operator>=(const MVT& S) const { return SimpleTy >= S.SimpleTy; }
     bool operator<=(const MVT& S) const { return SimpleTy <= S.SimpleTy; }
+//>> codestory machine-value-types.40 end
 
     /// Return true if this is a valid simple valuetype.
     bool isValid() const {

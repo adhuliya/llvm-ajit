@@ -27,6 +27,10 @@ namespace llvm {
   class LLVMContext;
   class Type;
 
+//>> codestory machine-value-types.10 start
+//>> Value types used in llvm backend.
+//>> At many places EVT type is used, which in most cases
+//>> is only used as a wrapper on MVT value type.
   /// Extended Value Type. Capable of holding value types which are not native
   /// for any processor (such as the i12345 type), as well as the types an MVT
   /// can represent.
@@ -40,6 +44,7 @@ namespace llvm {
     constexpr EVT(MVT::SimpleValueType SVT) : V(SVT) {}
     constexpr EVT(MVT S) : V(S) {}
 
+//>> codestory machine-value-types.10 end
     bool operator==(EVT VT) const {
       return !(*this != VT);
     }
